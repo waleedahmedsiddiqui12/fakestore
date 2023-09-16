@@ -1,16 +1,19 @@
 import { memo, useEffect, useState } from "react";
 import "./style.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import ReactExpandText from 'react-expand-text';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import ReactExpandText from "react-expand-text";
+import ReactStars from "react-rating-stars-component";
 
 function Home() {
   const [lstProducts, setProducts] = useState([]);
   let ui = 1;
   const [isActive, SetIsactive] = useState(false);
   const [singleProduct, setSingleProduct] = useState();
-  const [ismodalstate, setmodalstate] = useState(false);
+  const [isModalState, setModalState] = useState(false);
+
+
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -30,14 +33,15 @@ function Home() {
   const handleShow = (event) => {
     console.log(event.target.value);
     let id = event.target.value;
-
-    const a = lstProducts.find(a => a.id == id);
+    let a = lstProducts.find((a) => a.id == id);
     setSingleProduct(a);
-    console.log("single product: " + a.category);
-    setmodalstate(true);
-    setShow(true);
+    // console.log("single product: " + JSON.parse(JSON.stringify(lstProducts)));
+    //  console.log("single rating: " + a.rating[0].rate);
 
-  }
+    setModalState(true);
+    setShow(true);
+  };
+
 
 
   return (
@@ -46,13 +50,15 @@ function Home() {
         <header>
           <nav>
             <div className="logo">
-
-              <img src="" alt="logo" />
+              <img
+                src=" https://www.freeiconspng.com/uploads/retail-store-icon-18.png"
+                alt="logo"
+              />
             </div>
-
           </nav>
         </header>
         <main>
+   
 
           <section className="product-listing">
             {!isActive ? (
@@ -67,26 +73,48 @@ function Home() {
                   <h2>{i.title}</h2>
                   <span>{i.category}</span>
                   <p>PKR {i.price}</p>
-                  <ReactExpandText maxLength={50} text={i.description} className='my-css-class' />
+                  <ReactExpandText
+                    maxLength={50}
+                    text={i.description}
+                    className="my-css-class"
+                  />
                   <br></br>
-                  <Button variant="warning" onClick={handleShow} id={"md" + i.id} value={i.id}>
+                  <Button
+                    variant="warning"
+                    onClick={handleShow}
+                    id={"md" + i.id}
+                    value={i.id}
+                  >
                     View Details
                   </Button>
                 </div>
-
               ))
             )}
           </section>
         </main>
       </div>
-      {ismodalstate ? (
+      {isModalState ? (
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>{singleProduct.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div key={singleProduct.id}> {/* Make sure to provide a unique key */}
-              <p>{singleProduct.description}</p> {/* Assuming 'name' is a property of your product */}
+            <div key={singleProduct.id}>
+              <p>{singleProduct.description}</p>
+              {/* <p>
+               Rating: {singleProduct.rating.rate} (Count: {singleProduct.rating.count})
+              </p> */}
+              <p>
+                Rating :{" "}
+                <ReactStars
+                  count={singleProduct.rating.rate}
+                  size={15}
+                  edit={false}
+                  half={true}
+                  color2="#b50303"
+                />{" "}
+                (Count: {singleProduct.rating.count}){" "}
+              </p>
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -95,9 +123,9 @@ function Home() {
             </Button>
           </Modal.Footer>
         </Modal>
-      )
-        : ""
-      }
+      ) : (
+        ""
+      )}
     </>
   );
 }

@@ -27,7 +27,9 @@ nav {
     font-size: 24px;
 }
 .logo  img{
-    width: 100%;
+    width: 40%;
+    display: block;
+    height: auto;
 }
 .nav-links ul {
     list-style: none;
@@ -47,7 +49,7 @@ nav {
 main {
     /* max-width: 1200px; */
     margin: 20px auto;
-    padding: 20px;
+    padding: 50px;
 }
 
 .product-listing {
@@ -104,4 +106,40 @@ footer {
 span{
     font-variant: petite-caps;
 
-}
+}/* Basic styles for the search input */
+.search-input {
+    width: 250px; /* Set the width to your desired size */
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Style the search input when it's focused (clicked) */
+  .search-input:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #007bff; /* Change the border color when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle box shadow when focused */
+  }
+  
+  /* Style the search input placeholder text */
+  .search-input::placeholder {
+    color: #888;
+  }
+  
+  /* Style a search button (optional) */
+  .search-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Style the search button on hover (optional) */
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
