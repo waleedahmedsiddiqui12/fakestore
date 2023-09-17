@@ -62,10 +62,10 @@ function Home() {
 
           <section className="product-listing">
             {!isActive ? (
-              <img
-                src="https://cdn.dribbble.com/users/3742211/screenshots/9195657/media/6796a544d6f9ef1293d8d8d9e60d38d5.gif"
-                width="200"
-              />
+              // <img className="loader"
+              //   src="https://cdn.dribbble.com/users/3742211/screenshots/9195657/media/6796a544d6f9ef1293d8d8d9e60d38d5.gif"         
+              // />
+              <span class="loader"></span>
             ) : (
               lstProducts.map((i) => (
                 <div className="destination-card" key={ui++}>
